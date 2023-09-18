@@ -44,7 +44,7 @@ app.use("/user", userRoutes_1.default);
 //   closePool();
 //   process.exit(0);
 // });
-const port = config_1.config.port || 3001;
+const port = config_1.config.port || 4001;
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });

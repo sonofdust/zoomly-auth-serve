@@ -7,6 +7,7 @@ exports.config = void 0;
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 exports.config = {
+    accessKey: process.env.JWT_SECRET ?? "",
     refreshKey: process.env.JWT_REFRESH ?? "",
     apiKey: process.env.API_KEY ?? "",
     port: process.env.PORT ?? "",

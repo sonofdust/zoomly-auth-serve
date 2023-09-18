@@ -11,10 +11,6 @@ export const hashPassword = async (password: string): Promise<string> => {
   return await bcrypt.hash(password, saltRounds);
 };
 
-export const generateToken = (payload: object): string => {
-  return jwt.sign(payload, config.refreshKey, {expiresIn: "2h"});
-};
-
 export const authenticateToken = () => {
   return (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
     const authHeader = req.headers["authorization"];
@@ -35,7 +31,17 @@ export const authenticateToken = () => {
   };
 };
 
-export const getSignToken = (email: string) =>
-  jwt.sign({userId: email}, config.refreshKey, {
+export const getAccessToken = (credentials: {
+  email: string;
+  password: string;
+}) =>
+  jwt.sign(credentials, config.accessKey, {
     expiresIn: "1h",
+  });
+export const getRefreshToken = (credentials: {
+  email: string;
+  password: string;
+}) =>
+  jwt.sign(credentials, config.refreshKey, {
+    expiresIn: "5h",
   });

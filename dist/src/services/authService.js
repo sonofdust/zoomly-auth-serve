@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getSignToken = exports.authenticateToken = exports.generateToken = exports.hashPassword = void 0;
+exports.getAccessToken = exports.authenticateToken = exports.hashPassword = void 0;
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const config_1 = require("../config");
@@ -13,10 +13,6 @@ const hashPassword = async (password) => {
     return await bcryptjs_1.default.hash(password, saltRounds);
 };
 exports.hashPassword = hashPassword;
-const generateToken = (payload) => {
-    return jsonwebtoken_1.default.sign(payload, config_1.config.refreshKey, { expiresIn: "2h" });
-};
-exports.generateToken = generateToken;
 const authenticateToken = () => {
     return (req, res, next) => {
         const authHeader = req.headers["authorization"];
@@ -34,8 +30,8 @@ const authenticateToken = () => {
     };
 };
 exports.authenticateToken = authenticateToken;
-const getSignToken = (email) => jsonwebtoken_1.default.sign({ userId: email }, config_1.config.refreshKey, {
+const getAccessToken = (credentials) => jsonwebtoken_1.default.sign(credentials, config_1.config.accessKey, {
     expiresIn: "1h",
 });
-exports.getSignToken = getSignToken;
+exports.getAccessToken = getAccessToken;
 //# sourceMappingURL=authService.js.map
