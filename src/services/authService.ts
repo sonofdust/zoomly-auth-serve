@@ -12,7 +12,7 @@ export const hashPassword = async (password: string): Promise<string> => {
 };
 
 export const generateToken = (payload: object): string => {
-  return jwt.sign(payload, config.secretKey, {expiresIn: "2h"});
+  return jwt.sign(payload, config.refreshKey, {expiresIn: "2h"});
 };
 
 export const authenticateToken = () => {
@@ -24,7 +24,7 @@ export const authenticateToken = () => {
       return res.sendStatus(401);
     }
 
-    jwt.verify(token, config.secretKey, (err, decoded: any) => {
+    jwt.verify(token, config.refreshKey, (err, decoded: any) => {
       if (err) {
         return res.sendStatus(403);
       }
@@ -36,6 +36,6 @@ export const authenticateToken = () => {
 };
 
 export const getSignToken = (email: string) =>
-  jwt.sign({userId: email}, config.secretKey, {
+  jwt.sign({userId: email}, config.refreshKey, {
     expiresIn: "1h",
   });

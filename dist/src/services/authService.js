@@ -14,7 +14,7 @@ const hashPassword = async (password) => {
 };
 exports.hashPassword = hashPassword;
 const generateToken = (payload) => {
-    return jsonwebtoken_1.default.sign(payload, config_1.config.secretKey, { expiresIn: "2h" });
+    return jsonwebtoken_1.default.sign(payload, config_1.config.refreshKey, { expiresIn: "2h" });
 };
 exports.generateToken = generateToken;
 const authenticateToken = () => {
@@ -24,7 +24,7 @@ const authenticateToken = () => {
         if (!token) {
             return res.sendStatus(401);
         }
-        jsonwebtoken_1.default.verify(token, config_1.config.secretKey, (err, decoded) => {
+        jsonwebtoken_1.default.verify(token, config_1.config.refreshKey, (err, decoded) => {
             if (err) {
                 return res.sendStatus(403);
             }
@@ -34,7 +34,7 @@ const authenticateToken = () => {
     };
 };
 exports.authenticateToken = authenticateToken;
-const getSignToken = (email) => jsonwebtoken_1.default.sign({ userId: email }, config_1.config.secretKey, {
+const getSignToken = (email) => jsonwebtoken_1.default.sign({ userId: email }, config_1.config.refreshKey, {
     expiresIn: "1h",
 });
 exports.getSignToken = getSignToken;

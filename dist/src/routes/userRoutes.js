@@ -7,9 +7,7 @@ const authService_1 = require("../services/authService");
 const router = (0, express_1.Router)();
 router.post("/login", userController_1.login);
 router.post("/signup", userController_1.signup);
-router.put("/change-password", 
-//  authenticateToken(config.secretKey),
-(0, authService_1.authenticateToken)(), userController_1.change_password);
+router.put("/change-password", (0, authService_1.authenticateToken)(), userController_1.change_password);
 //router.get("/test", test);
 exports.default = router;
 //# sourceMappingURL=userRoutes.js.map

@@ -3,7 +3,6 @@ import dotenv from "dotenv";
 dotenv.config();
 
 export const config = {
-  secretKey: process.env.JWT_SECRET ?? "",
   refreshKey: process.env.JWT_REFRESH ?? "",
   apiKey: process.env.API_KEY ?? "",
   port: process.env.PORT ?? "",
